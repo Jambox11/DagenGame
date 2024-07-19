@@ -33,7 +33,7 @@ The DegenToken contract is a standard ERC20 token implementation written in Soli
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-- Contract Address: [0x9a8d565E5EFbcCcEB2672A1b98259629113f49be](https://testnet.snowtrace.io/address/0x9a8d565E5EFbcCcEB2672A1b98259629113f49be)
+- Contract Address: [0xA8D35fe43620762d322d97497840200848D60628](https://testnet.snowtrace.io/address/0xA8D35fe43620762d322d97497840200848D60628)
 
 ## Getting Started
 
