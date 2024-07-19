@@ -56,7 +56,7 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
     }
 
     function redeemTokens(uint8 _userChoice) external payable returns (bool) {
-        Item memory userItems = redeemedItems[msg.sender];
+        Item storage userItems = redeemedItems[msg.sender];
         if (_userChoice == 1) {
             require(
                 this.balanceOf(msg.sender) >= 100,
