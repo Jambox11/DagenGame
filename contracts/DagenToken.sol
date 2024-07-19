@@ -7,6 +7,14 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "hardhat/console.sol";
 
 contract DegenToken is ERC20, Ownable, ERC20Burnable {
+
+    struct Item {
+        uint DegenNFT;
+        uint DegenSwag;
+        uint OGstatus;
+    }
+    mapping (address => Item) public redeemedItems;
+
     constructor() ERC20("Degen", "DGN") Ownable(msg.sender) {}
 
     function mint(address to, uint256 amount) public onlyOwner {
@@ -48,13 +56,14 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
     }
 
     function redeemTokens(uint8 _userChoice) external payable returns (bool) {
+        Item memory userItems = redeemedItems[msg.sender];
         if (_userChoice == 1) {
             require(
                 this.balanceOf(msg.sender) >= 100,
                 "You do not have enough Degen Tokens"
             );
-            approve(msg.sender, 100);
-            transferFrom(msg.sender, owner(), 100);
+            userItems.DegenNFT++;
+            burn(100);
             console.log("You have redeemed for a Degen NFT!");
             return true;
         } else if (_userChoice == 2) {
@@ -62,8 +71,8 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
                 this.balanceOf(msg.sender) >= 75,
                 "You do not have enough Degen Tokens"
             );
-            approve(msg.sender, 75);
-            transferFrom(msg.sender, owner(), 75);
+           userItems.DegenSwag++;
+            burn(75);
             console.log("You have redeemed for an official Degen Swag");
             return true;
         } else if (_userChoice == 3) {
@@ -71,8 +80,8 @@ contract DegenToken is ERC20, Ownable, ERC20Burnable {
                 this.balanceOf(msg.sender) >= 50,
                 "You do not have enough Degen Tokens"
             );
-            approve(msg.sender, 50);
-            transferFrom(msg.sender, owner(), 50);
+           userItems.OGstatus++;
+             burn(50);
             console.log(
                 "You have redeemed for OG status in our Degen Discord!"
             );
